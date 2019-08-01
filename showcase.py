@@ -44,7 +44,7 @@ def processor(fsType):
 		"processorType": "inboundFactSheet",
 		"processorName": "Apps from Deployments",
 		"processorDescription": "My description",
-    "run": 0,
+		"run": 0,
 		"type": fsType,
 		"identifier": {
 			"external": {
@@ -53,12 +53,7 @@ def processor(fsType):
 			}
 		},
 		"filter": { "type": fsType },
-		"updates": [ 
-      { 
-        "key": { "expr": "name" },
-				"values": [ { "expr": "${data.name}" }	]
-			}	
-		]
+		"updates": [{ "key": { "expr": "name" }, "values": [{ "expr": "${data.name}" }]}]
 	}
 
 def relationProcessor(fsType, rel):
@@ -99,20 +94,15 @@ for index, row in df.iterrows():
 content = []
 for app in apps:
   content.append({
-			"type": "Application",
-			"id": app,
-			"data": {
-				"name": app,
-        "itc": appToITC[app]
-      }
+		"type": "Application",
+		"id": app,
+		"data": { "name": app, "itc": appToITC[app] }
   })
 for itc in itcs:
   content.append({
-			"type": "ITComponent",
-			"id": itc,
-			"data": {
-				"name": itc
-      }
+		"type": "ITComponent",
+		"id": itc,
+		"data": { "name": itc }
   })
 
 # 3. Setup processors
