@@ -1,0 +1,27 @@
+{
+	"connectorType": "hierarchy",
+	"connectorId": "hierarchy",
+	"connectorVersion": "1.0",
+	"lxVersion": "1.0.0",
+	"description": "Imports sample hierarchy data into LeanIX",
+	"processingDirection": "inbound",
+	"processingMode": "partial",
+	"customFields": {},
+	"content": [
+		{
+			"type": "App",
+			"id": "Parent_1",
+			"data": {
+				"name": "Test_123"
+			}
+		},
+		{
+			"type": "App",
+			"id": "Child_1",
+			"data": {
+				"name": "Test_123",
+                "parent": "Parent_1"
+			}
+		}
+	]
+}

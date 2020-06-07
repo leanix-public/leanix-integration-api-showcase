@@ -1,0 +1,72 @@
+{
+    "processors": [
+        {
+            "processorType": "inboundFactSheet",
+            "processorName": "Apps from Deployments",
+            "processorDescription": "Creates LeanIX Applications from Kubernetes Deployments",
+            "type": "Application",
+            "filter": {
+                "type": "App"
+            },
+            "identifier": {
+                "external": {
+                    "id": {
+                        "expr": "${content.id}"
+                    },
+                    "type": {
+                        "expr": "externalId"
+                    }
+                }
+            },
+            "run": 0,
+            "updates": [
+                {
+                    "key": {
+                        "expr": "name"
+                    },
+                    "values": [
+                        {
+                            "expr": "${data.name}"
+                        },
+                        {
+                            "expr": "${data.name} (${content.id})"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "processorType": "inboundRelation",
+            "processorName": "Rel To Parent",
+            "processorDescription": "Creates LeanIX Relations between the created or updated Applications",
+            "type": "relToParent",
+            "filter": {
+                "advanced": "${data.parent != null}"
+            },
+            "from": {
+                "external": {
+                    "id": {
+                        "expr": "${content.id}"
+                    },
+                    "type": {
+                        "expr": "externalId"
+                    }
+                }
+            },
+            "to": {
+                "external": {
+                    "id": {
+                        "expr": "${data.parent}"
+                    },
+                    "type": {
+                        "expr": "externalId"
+                    }
+                }
+            },
+            "run": 1,
+            "updates": [],
+            "logLevel": "debug"
+        }
+    ],
+    "variables": {}
+}
